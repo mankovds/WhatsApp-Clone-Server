@@ -1,0 +1,200 @@
+<% include header.ejs %>
+
+<main class="main-content bgc-grey-100">
+  <div id="mainContent">
+    <div class="container-fluid">
+      <form role="form" action="/admin/dashboard/save_settings" method="POST">
+        <div class="bgc-light-blue-500 c-white p-20">
+          <h4 class="text-center"><strong>General Settings</strong></h4>
+        </div>
+
+        <div class="form-group">
+          <label for="privacy_link">Privacy Policy Link</label>
+          <input class="form-control" type="text" value="<%= settings.privacy_link %>" name="privacy_link"
+            id="privacy_link">
+
+        </div>
+
+        <div class="form-group">
+          <label for="app_name">Application Name Ex:WhatsClone</label>
+          <input class="form-control" type="text" value="<%= settings.app_name %>" name="app_name" id="app_name"
+            required>
+
+        </div>
+
+        <div class="form-group">
+          <label for="app_version">Application Version Code Ex: 26</label>
+          <input class="form-control" type="text" value="<%= settings.app_version %>" name="app_version"
+            id="app_version">
+
+        </div>
+
+        <div class="form-group">
+          <label for="demo_app">
+            <span>Enable Demo App "This option to disable verification so this maybe affect the users privacy "</span>
+            <% if ( settings.demo_app  ==  'on') {
+                          %> <input type="checkbox" name="demo_app" id="demo_app" checked>
+            <%  } else {  %>
+            <input type='checkbox' id='demo_app' name='demo_app'>
+            <%  }   %>
+
+            <input id='demo_appHidden' type='hidden' value='off' name='demo_app'>
+
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="giphy_key">GHIPY Key </label>
+          <input class="form-control" type="text" value="<%= settings.giphy_key %>" name="giphy_key" id="giphy_key">
+
+        </div>
+
+
+
+        <div class="bgc-light-blue-500 c-white p-20">
+          <h4 class="text-center"><strong>Twilio provider settings</strong></h4>
+        </div>
+        <div class="form-group">
+
+          <label for="sms_authentication_key">SMS Authentication Token</label>
+          <input class="form-control" type="text" value="<%=  settings.sms_authentication_key %>"
+            name="sms_authentication_key" id="sms_authentication_key">
+        </div>
+
+        <div class="form-group">
+
+          <label for="account_sid">SMS provider Account Sid </label>
+          <input class="form-control" type="text" value="<%= settings.account_sid %>" name="account_sid"
+            id="account_sid">
+        </div>
+        <div class="form-group">
+          <label for="phone_number">SMS provider Number phone</label>
+          <input class="form-control" type="text" value="<%= settings.phone_number %>" name="phone_number"
+            id="phone_number">
+
+        </div>
+        <div class="bgc-light-blue-500 c-white p-20">
+          <h4 class="text-center"><strong>Admob Settings "General"</strong></h4>
+        </div>
+        <div class="form-group">
+          <label for="publisher_id">Admob Publisher ID</label>
+          <input class="form-control" type="text" value="<%= settings.publisher_id %>" name="publisher_id"
+            id="publisher_id">
+
+        </div>
+
+        <div class="bgc-light-blue-500 c-white p-20">
+          <h4 class="text-center"><strong>Admob Settings "Banner ads"</strong></h4>
+        </div>
+        <div class="form-group">
+          <label for="banner_ads_unit_id">Admob Banner Unit ID</label>
+          <input class="form-control" type="text" value="<%= settings.banner_ads_unit_id %>" name="banner_ads_unit_id"
+            id="banner_ads_unit_id">
+
+        </div>
+        <div class="form-group">
+          <label for="banner_ads_status">
+            <span>Enable Banner Ads</span>
+            <% if ( settings.banner_ads_status  ==  'on') {
+                          %> <input type="checkbox" name="banner_ads_status" id="banner_ads_status" checked>
+            <%  } else {  %>
+            <input type='checkbox' id='banner_ads_status' name='banner_ads_status'>
+            <%  }   %>
+
+            <input id='banner_ads_statusHidden' type='hidden' value='off' name='banner_ads_status'>
+
+          </label>
+        </div>
+
+        <div class="bgc-light-blue-500 c-white p-20">
+          <h4 class="text-center"><strong>Admob Settings "Interstitial ads"</strong></h4>
+        </div>
+        <div class="form-group">
+          <label for="interstitial_ads_unit_id">Admob Interstitial Unit ID</label>
+          <input class="form-control" type="text" value="<%= settings.interstitial_ads_unit_id %>"
+            name="interstitial_ads_unit_id" id="interstitial_ads_unit_id">
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-card-settings">
+
+
+          <label for="interstitial_ads_status">
+            <span>Enable Interstitial Ads</span>
+            <% if ( settings.interstitial_ads_status  ==  'on') {
+                          %> <input type="checkbox" name="interstitial_ads_status" id="interstitial_ads_status"
+              checked>
+            <%  } else {  %>
+            <input type='checkbox' id='interstitial_ads_status' name='interstitial_ads_status'>
+            <%  }   %>
+
+            <input id='interstitial_ads_statusHidden' type='hidden' value='off' name='interstitial_ads_status'>
+
+          </label>
+
+        </div>
+
+        <div class="bgc-light-blue-500 c-white p-20">
+          <h4 class="text-center"><strong>Admob Settings "Video ads"</strong></h4>
+        </div>
+        <div class="form-group">
+          <label for="video_ads_unit_id">Admob Video Unit ID</label>
+          <input class="form-control" type="text" value="<%= settings.video_ads_unit_id %>" name="video_ads_unit_id"
+            id="video_ads_unit_id">
+
+          <label for="video_ads_app_id">Admob Video APP ID</label>
+          <input class="form-control" type="text" value="<%= settings.video_ads_app_id %>" name="video_ads_app_id"
+            id="video_ads_app_id">
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-card-settings">
+
+
+          <label for="video_ads_status">
+            <span>Enable Video Ads</span>
+            <% if ( settings.video_ads_status  == 'on') {
+                            %> <input type="checkbox" name="video_ads_status" id="video_ads_status" checked>
+            <%  } else {  %>
+            <input type='checkbox' id='video_ads_status' name='video_ads_status'>
+            <%  }   %>
+
+            <input id='video_ads_statusHidden' type='hidden' value='off' name='video_ads_status'>
+
+          </label>
+
+        </div>
+
+        <div class="form-group"></div>
+        <center><button type="submit" class="btn  btn-info text-center " onclick="disableHiddenInputs()">
+            <i>Save Changes</i></button></center>
+
+
+      </form>
+    </div>
+  </div>
+</main>
+<script>
+  function changeInputs(obj) {
+
+    var cbs = document.getElementsByClassName("sms_verify");
+    for (var i = 0; i < cbs.length; i++) {
+      cbs[i].checked = false;
+    }
+    obj.checked = true;
+  }
+
+  function disableHiddenInputs() {
+    if (document.getElementById("demo_app").checked) {
+      document.getElementById('demo_appHidden').disabled = true;
+    }
+    if (document.getElementById("banner_ads_status").checked) {
+      document.getElementById('banner_ads_statusHidden').disabled = true;
+    }
+
+    if (document.getElementById("interstitial_ads_status").checked) {
+      document.getElementById('interstitial_ads_statusHidden').disabled = true;
+    }
+    if (document.getElementById("video_ads_status").checked) {
+      document.getElementById('video_ads_statusHidden').disabled = true;
+    }
+  }
+</script>
+
+
+<% include footer.ejs %>

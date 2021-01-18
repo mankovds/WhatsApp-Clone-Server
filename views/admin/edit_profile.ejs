@@ -1,0 +1,119 @@
+<% include header.ejs %>
+
+<main class="main-content bgc-grey-100">
+  <div id="mainContent">
+    <%
+if (user.image != null) {
+    %>
+
+
+    <div class="box  " style="max-width: 600px ;margin: 0 auto; margin-top: 10%">
+      <center>
+        <div class="box-header with-border">
+          <h3 class="box-title">Admin Profile</h3>
+        </div>
+      </center>
+      <!-- /.box-header -->
+
+      <center>
+        <div class="box-body ">
+          <!-- form start -->
+
+          <form role="form" action="/admin/dashboard/save_profile" method="POST" enctype="multipart/form-data">
+            <center>
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-card-settings">
+                <img style="width: 100px ;height: 100px" alt="User Image" class="img-circle"
+                  src="/../api/v1/files_dashboard/user_avatars/<%= user._id %>/<%= user.image %>">
+                <i><input class="mdl-textfield__input" type='file' name="uploadDashboard" /></i>
+              </div>
+            </center>
+
+
+            <%
+} else {
+    %>
+
+            <div class="box  " style="max-width: 600px ;margin: 0 auto; margin-top: 10%">
+              <center>
+                <div class="box-header with-border">
+                  <h3 class="box-title">Admin Profile</h3>
+                </div>
+              </center>
+              <!-- /.box-header -->
+
+              <center>
+                <div class="box-body ">
+                  <% if(!success){
+
+                          if(message !== null){ %>
+                  <center>
+                    <div class="alert alert-danger"> <i class="fa fa-times-circle-o"></i>
+                      <%= message %></div>
+                  </center>
+                  <% }
+                               }else{
+
+                                      if(message !== null){ %>
+                  <center>
+                    <div class="alert alert-success "> <label class="control-label" for="inputSuccess"><i
+                          class="fa fa-check"></i>
+                        <%= message %>
+                      </label></div>
+                  </center>
+                  <% }
+                               } %>
+                  <form role="form" action="/admin/dashboard/save_profile" method="POST" enctype="multipart/form-data">
+                    <center>
+                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-card-settings">
+                        <img style="width: 100px ;height: 100px" alt="User Image" class="img-circle"
+                          src="/image_holder_ur_circle.png">
+                        <input class="mdl-textfield__input" type='file' id="uploadDashboard" name="uploadDashboard" />
+
+                      </div>
+                    </center>
+                    <%
+}
+%>
+
+
+                    <div class="form-group">
+                      <label for="admin_name">Admin name</label>
+                      <input type="text" class="form-control" name="admin_name" id="admin_name"
+                        value="<%= user.username %>" placeholder="Admin name" required>
+
+                    </div>
+
+                    <div class="form-group">
+                      <label for="admin_email">Admin email</label>
+                      <input type="text" class="form-control" name="admin_email" id="admin_email"
+                        value="<%= user.email %>" placeholder="Admin email" required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                      <label for="old_admin_password">Old Admin password</label>
+                      <input type="text" class="form-control" name="old_admin_password" id="old_admin_password"
+                        placeholder="Old password" pattern=".{8,}" required>
+                    </div>
+                    <div class="form-group">
+
+                      <label for="admin_password">New password</label>
+                      <input type="text" class="form-control" name="admin_password" id="admin_password"
+                        placeholder="New Password" pattern=".{8,}" required>
+                    </div>
+
+
+                    <center>
+                      <button type="submit" class="btn  btn-info btn-lg"> <i>Save Changes</i></button>
+                    </center>
+                  </form>
+
+                </div>
+              </center>
+            </div>
+        </div>
+    </div>
+  </div>
+</main>
+<% include footer.ejs %>

@@ -1,0 +1,182 @@
+<html>
+
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Install</title>
+ 
+    <style>
+      #loader {
+        transition: all 0.3s ease-in-out;
+        opacity: 1;
+        visibility: visible;
+        position: fixed;
+        height: 100vh;
+        width: 100%;
+        background: #fff;
+        z-index: 90000;
+      }
+ 
+      #loader.fadeOut {
+        opacity: 0;
+        visibility: hidden;
+      }
+ 
+      .spinner {
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        top: calc(50% - 20px);
+        left: calc(50% - 20px);
+        background-color: #333;
+        border-radius: 100%;
+        -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
+        animation: sk-scaleout 1.0s infinite ease-in-out;
+      }
+ 
+      @-webkit-keyframes sk-scaleout {
+        0% {
+          -webkit-transform: scale(0)
+        }
+ 
+        100% {
+          -webkit-transform: scale(1.0);
+          opacity: 0;
+        }
+      }
+ 
+      @keyframes sk-scaleout {
+        0% {
+          -webkit-transform: scale(0);
+          transform: scale(0);
+        }
+ 
+        100% {
+          -webkit-transform: scale(1.0);
+          transform: scale(1.0);
+          opacity: 0;
+        }
+      }
+    </style>
+    <link href="/style.css" rel="stylesheet">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+ 
+
+  <body class="app">
+  <main class="main-content bgc-grey-100">
+    <div id="mainContent">
+    <div class="content">
+      <% if(!success){
+
+         if(message !== null){ %>
+      <center>
+        <div class="form-group has-error"> <label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i>
+            <%= message %>
+          </label></div>
+      </center>
+      <% }
+              }else{
+
+                     if(message !== null){ %>
+      <center>
+        <div class="form-group has-success "> <label class="control-label" for="inputSuccess"><i class="fa fa-check"></i>
+            <%= message %>
+          </label></div>
+      </center>
+      <% }
+              } %>
+
+
+
+      <div class="box box-primary  lockscreen-wrapper" style="max-width: 800px ;margin: 0 auto; margin-top: 5%">
+        <div class="box-header with-border">
+          <center>
+            <h2 class="box-title info">Fill information</h2>
+          </center>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+
+        <form class="form-horizontal" action="/install" method="POST">
+
+          <div class="box-body">
+
+            <div class="form-group">
+
+              <div class="col-sm-12">
+                <input class="form-control" type="text" value="" name="db_name" id="db_name" placeholder="Database Name">
+              </div>
+
+            </div>
+            <div class="form-group">
+
+              <div class="col-sm-12">
+                <input class="form-control" type="text" value="" name="db_user_name" id="db_user_name" placeholder="Database Username">
+              </div>
+
+            </div>
+            <div class="form-group">
+              <div class="col-sm-12">
+                <input class="form-control" type="password" value="" name="db_user_password" id="db_user_password" placeholder="Database Password">
+              </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-12">
+                  <input class="form-control" type="text" value="" name="server_name" id="server_name" placeholder="Server name / Domain">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-12">
+                  <input class="form-control" type="text" value="" name="server_ip" id="server_ip" placeholder="Server Ip">
+                </div>
+              </div>
+            <div class="form-group">
+              <div class="col-sm-12">
+                <input class="form-control" type="text" value="" name="p_name" id="p_name" placeholder="Personal name ">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-12">
+                <input class="form-control" type="text" value="" name="email" id="email" placeholder="Personal  email">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-12">
+                <input class="form-control" type="text" value="" name="purchase_code" id="purchase_code" placeholder="Purchase code  ">
+              </div>
+            </div>
+          </div>
+
+
+          <!-- /.box-body -->
+          <div class="box-footer">
+            <center>
+              <button type="submit" class="btn btn-success  ">Next</button>
+            </center>
+          </div>
+          <!-- /.box-footer -->
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+</main>
+
+
+  <footer class="bdT ta-c p-30 lh-0 fsz-sm c-grey-600"><span>Copyright © 2018 Designed by <a
+    href="https://colorlib.com" target="_blank" title="Colorlib">Colorlib</a>. All rights
+  reserved.</span>
+  </a>
+  </footer>
+  <script type="text/javascript" src="/vendor.js"></script>
+  <script type="text/javascript" src="/bundle.js"></script>
+  
+  </body>
+  
+  </html>

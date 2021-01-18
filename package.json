@@ -1,0 +1,56 @@
+{
+  "name": "whatsclone",
+  "version": "1.0.0",
+  "description": "restfull whatscloneAPI",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "test": "grunt test"
+  },
+  "main": "./bin/www",
+  "keywords": [
+    "whatsclone",
+    "api",
+    "chat",
+    "call"
+  ],
+  "author": "Abderrahim El imame",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "^1.0.4",
+    "grunt-apidoc": "^0.11.0",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-mocha-test": "^0.13.3",
+    "grunt-nodemon": "^0.4.2",
+    "mocha": "^6.2.2",
+    "nodemon": "^2.0.1"
+  },
+  "dependencies": {
+    "async": "^3.1.0",
+    "basic-auth": "^2.0.1",
+    "body-parser": "^1.19.0",
+    "composable-middleware": "^0.3.0",
+    "connect-mongo": "^3.2.0",
+    "cookie-parser": "^1.4.4",
+    "dotenv": "^8.2.0",
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
+    "express-jwt": "^5.3.1",
+    "express-session": "^1.17.0",
+    "express-validator": "^5.3.1",
+    "i18n": "^0.8.4",
+    "jsonwebtoken": "^8.5.1",
+    "lusca": "^1.6.1",
+    "mongodb": "^3.3.5",
+    "mongoose": "^5.7.13",
+    "morgan": "^1.9.1",
+    "mosca": "^2.8.3",
+    "mqtt": "^3.0.0",
+    "multer": "^1.4.2",
+    "readdir": "0.1.0",
+    "serve-favicon": "^2.5.0",
+    "twilio": "^3.37.1",
+    "underscore": "^1.9.1",
+    "uuid": "^3.3.3"
+  }
+}

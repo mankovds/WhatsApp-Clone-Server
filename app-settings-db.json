@@ -1,0 +1,52 @@
+[{
+  "name": "privacy_link",
+  "value": "https://strolink.com/privacy_link"
+}, {
+  "name": "app_name",
+  "value": "WhatsClone"
+}, {
+  "name": "app_version",
+  "value": "1"
+}, {
+  "name": "giphy_key",
+  "value": "put your giphy key here"
+}, {
+  "name": "demo_app",
+  "value": "off"
+}, {
+  "name": "sms_verification",
+  "value": "on"
+}, {
+  "name": "sms_authentication_key",
+  "value": "put your SMS provider authentication key here"
+}, {
+  "name": "account_sid",
+  "value": "put your SMS provider account SID here"
+}, {
+  "name": "phone_number",
+  "value": "put your SMS provider phone number here"
+}, {
+  "name": "publisher_id",
+  "value": "here your admob publisher  id "
+}, {
+  "name": "video_ads_app_id",
+  "value": "put your Video app id of admob"
+}, {
+  "name": "video_ads_status",
+  "value": "off"
+}, {
+  "name": "video_ads_unit_id",
+  "value": "put your Video unit id of admob"
+}, {
+  "name": "interstitial_ads_status",
+  "value": "off"
+}, {
+  "name": "interstitial_ads_unit_id",
+  "value": "put your Interstitial unit id of admob"
+}, {
+  "name": "banner_ads_status",
+  "value": "off"
+}, {
+  "name": "banner_ads_unit_id",
+  "value": "put your unit id of admob"
+}]

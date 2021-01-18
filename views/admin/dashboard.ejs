@@ -1,0 +1,233 @@
+<% include header.ejs %>
+
+<main class="main-content bgc-grey-100">
+  <div id="mainContent">
+    <div class="row gap-20 masonry pos-r">
+
+      <div class="masonry-sizer col-md-6"></div>
+      <div class="masonry-item w-100">
+        <div class="row gap-20">
+
+          <div class="col-md-4">
+            <div class="layers bd bgc-white p-20">
+              <div class="layer w-100 mB-10">
+                <h6 class="lh-1">Total Users</h6>
+              </div>
+              <div class="layer w-100">
+                <div class="peers ai-sb fxw-nw">
+                  <div class="peer peer-greed"><span id="sparklinedash"></span></div>
+                  <div class="peer"><span
+                      class="d-ib lh-0 va-m fw-600 bdrs-10em pX-15 pY-15 bgc-green-50 c-green-500"><%= usersCounter %></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-md-4">
+            <div class="layers bd bgc-white p-20">
+              <div class="layer w-100 mB-10">
+                <h6 class="lh-1">Total Messages</h6>
+              </div>
+              <div class="layer w-100">
+                <div class="peers ai-sb fxw-nw">
+                  <div class="peer peer-greed"><span id="sparklinedash3"></span></div>
+                  <div class="peer"><span
+                      class="d-ib lh-0 va-m fw-600 bdrs-10em pX-15 pY-15 bgc-blue-50 c-blue-500"><%= chatsCounter %></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-md-4">
+            <div class="layers bd bgc-white p-20">
+              <div class="layer w-100 mB-10">
+                <h6 class="lh-1">Total Groups</h6>
+              </div>
+              <div class="layer w-100">
+                <div class="peers ai-sb fxw-nw">
+                  <div class="peer peer-greed"><span id="sparklinedash4"></span></div>
+                  <div class="peer"><span
+                      class="d-ib lh-0 va-m fw-600 bdrs-10em pX-15 pY-15 bgc-red-50 c-red-500"><%= groupsCounter %></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="masonry-item col-12">
+        <div class="bd bgc-white">
+          <div class="layers">
+            <div class="layer w-100 p-20">
+              <h6 class="lh-1">New Users</h6>
+            </div>
+
+            <div class="layer ">
+
+
+
+              <div class="row gap-20">
+                <%
+                      lastUsers.forEach(user => { %>
+                <div class="col-md-2">
+                  <div class="layers  bgc-white p-20">
+                    <div class="layer  mB-13">
+                      <%   if (user.image !== null) { %>
+                      <img class="w-4r bdrs-50p"
+                        src="/../api/v1/files_dashboard/user_avatars/<%= user._id %>/<%= user.image %>" alt=""
+                        onerror="this.src='/image_holder_ur_circle.png'" >
+                      <% } else {  %>
+                      <img class="w-4r bdrs-50p" src="/image_holder_ur_circle.png" alt="">
+                      <%
+                                }%>
+
+                    </div>
+                    <div class="layer ">
+                      <div class="peer"><span
+                          class="d-ib lh-0 va-m fw-600 bdrs-10em pX-15 pY-15 bgc-blue-50 c-blue-500">
+                          <%
+                                if (user.username == null) {%>
+                          <%= user.phone%>
+                          <%  } else {%>
+                          <%= user.username%>
+                          <%  } %>
+                        </span>
+
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+                <%  }); %>
+
+              </div>
+            </div>
+          </div>
+          <div class="ta-c bdT w-100 p-20"><a href="/admin/dashboard/users/1">View all users</a></div>
+        </div>
+      </div>
+
+      <div class="masonry-item col-12">
+        <div class="bd bgc-white">
+          <div class="peers fxw-nw@lg+ ai-s">
+            <div class="peer peer-greed w-70p@lg+ w-100@lg- p-20">
+              <div class="layers">
+                <div class="layer w-100 mB-10">
+                  <h6 class="lh-1">Users by country</h6>
+                </div>
+                <div class="layer w-100">
+
+                  <div id="world-maps-marker" style="width:100% ;height:350px"></div>
+                </div>
+              </div>
+            </div>
+            <div class="peer bdL p-20 w-30p@lg+ w-100p@lg-">
+              <div class="layers">
+                <div class="layer w-100">
+
+                  <div class="chart-responsive">
+                    <div id="pieChart"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi">
+
+</script>
+
+
+<script>
+  /*for google charts */
+
+  google.charts.load('current', {
+    'packages': ['geochart', 'corechart']
+  });
+
+  google.charts.setOnLoadCallback(drawRegionsMap);
+
+
+  function drawRegionsMap() {
+
+    var data01 = [
+      ['Country', 'Popularity']
+    ];
+
+    $.each(<%- JSON.stringify(usersByCountry) %>, function (data, value) {
+      data01.push([value.Country, value.Popularity]);
+    });
+
+    var data = google.visualization.arrayToDataTable(data01);
+
+    var options = {
+      colorAxis: {
+        colors: ['#ffffff', '#03a9f3', '#03a9f3'],
+        minValue: 0,
+        maxValue: 2
+      },
+      backgroundColor: {
+        fill: '#ffffff'
+      }
+    };
+    var chart = new google.visualization.GeoChart(document.getElementById('world-maps-marker'));
+    chart.draw(data, options);
+
+    function resizeHandler() {
+      chart.draw(data, options);
+    }
+    if (window.addEventListener) {
+      window.addEventListener('resize', resizeHandler, false);
+    } else if (window.attachEvent) {
+      window.attachEvent('onresize', resizeHandler);
+    }
+  }
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+    var data01 = [
+      ['Country', 'Popularity']
+    ];
+    $.each(<%- JSON.stringify(usersByCountry) %>, function (data, value) {
+      data01.push([value.Country, value.Popularity]);
+    });
+
+    var data = google.visualization.arrayToDataTable(data01);
+    var options = {
+      backgroundColor: {
+        fill: '#ffffff',
+        colors: ['#e0440e', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6']
+      }
+    };
+    var chart = new google.visualization.PieChart(document.getElementById('pieChart'));
+    chart.draw(data, options);
+
+    function resizeHandler() {
+      chart.draw(data, options);
+    }
+    if (window.addEventListener) {
+      window.addEventListener('resize', resizeHandler, false);
+    } else if (window.attachEvent) {
+      window.attachEvent('onresize', resizeHandler);
+    }
+  }
+</script>
+
+
+<% include footer.ejs %>

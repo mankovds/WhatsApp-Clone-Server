@@ -1,0 +1,135 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+'use strict';
+const app = require('../app'); 
+const http = require('http');
+const config = require('../config/environment');
+
+// Require MQTT broker
+var mosca = require('mosca');
+/**
+ * Get port from environment and store in Express.
+ */
+
+const port = normalizePort(process.env.PORT || config.port);
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+const server = http.createServer(app);
+
+/**
+ * implement Mosca mqtt server
+ */
+
+// This settings is required to enable persistent session feature.
+// All events will be stored in MongoDB
+var ascoltatore = {
+  type: 'mongo',
+  url: config.mongo.uri,
+  size: 10 * 1024 * 1024 * 1024, // 10 GB
+  max: 5000 * 10000, // documents
+  pubsubCollection: 'mqtt_events',
+  mongo: {}
+};
+// Final settings for Mosca MQTT broker
+var settings = {
+  port: 1883, 
+ // logger: { name: 'MoscaServer', level: 'debug' },
+  //persistence: mosca.persistence.Memory // using ascoltatore over memory
+  /* backend: ascoltatore,
+  */ persistence: {
+     factory: mosca.persistence.Mongo,
+     url: config.mongo.uri
+   }
+};
+
+// Define HTTP and MQTT servers
+var mqttServ = new mosca.Server(settings);
+
+// Attach HTTP to MQTT server
+//mqttServ.attachHttpServer(server);
+
+ 
+/**
+  * server listener
+  */
+server.listen(port, function () {
+  debug('Server listening at port %d', port);
+});
+/**
+ * Mqtt handlerfor realtime events
+ **/
+
+require('../api/mqtt/broker.js')(mqttServ); 
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  /*const addr = server.address();
+  const bind = typeof addr === 'string' ?
+    'pipe ' + addr :
+    'port ' + addr.port;*/
+  debug('Listening on ' + port);
+
+}
+
+function debug( name){
+  console.log(name);
+}
