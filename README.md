@@ -132,5 +132,11 @@ Step 37:
 restart app_name
  
 <br/><br/>
-Download Android Source Code from:
+Download Android Source from:
 https://github.com/deveperl99/WhatsApp-Clone-Android-Source
+<br/><br/>
+Download IOS Source from:
+https://github.com/deveperl99/WhatsApp-Clone-IOS-Source
+<br/><br/>
+Download WEB Source from:
+https://github.com/deveperl99/WhatsApp-Clone-WEB-Source
