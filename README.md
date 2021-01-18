@@ -89,7 +89,7 @@ Step 23:
 db.admins.insert({username: "admin", email: "admin@gmail.com" ,salt: "BSIHYXkIS0q23PjTeIWBMg==" ,hashedPassword: "UeMfAwSrGhCo6jz3bxQ6A3s0qMpoNDEyHh1oziihC4PTJ8lrI4LYvSRBvKIgQY2DtS8IVJCW2kab1uDz52KZ/g==" })
 
 Step 24:
-db.createUser({user:"username", pwd:"username", roles:[{role:"readWrite", db:"whatsappclone"}]})
+db.createUser({user:"username", pwd:"password", roles:[{role:"readWrite", db:"whatsappclone"}]})
 
 Step 25:
 exit
@@ -104,7 +104,7 @@ Step 28:
 cd /var/www/whatsapp_clone/
 
 Step 29:
-mongoimport -u whatsappclone -p "username" --jsonArray -d whatsappclone -c settings --drop --file  app-settings-db.json
+mongoimport -u username -p "password" --jsonArray -d whatsappclone -c settings --drop --file  app-settings-db.json
 
 Step 30:
 npm install --production
